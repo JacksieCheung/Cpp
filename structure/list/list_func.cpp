@@ -123,7 +123,7 @@ Status LocateElem(SqList* L,ElemType e,Status(*compare)(ElemType,ElemType)){
 		int count=0;
 		ElemType* ptr=L->elem;
 		for (int i=0;i<L->length;i++){
-			if (Compare(*ptr,e)){
+			if ((*Compare)(*ptr,e)){
 				return count+1;
 			}
 			count++;
@@ -133,4 +133,69 @@ Status LocateElem(SqList* L,ElemType e,Status(*compare)(ElemType,ElemType)){
 	return ERROR;
 }
 
+// 找线性表元素的前驱
+Status PriorElem(SqList* L,ElemType cure_e, ElemType* pre_e){
+	if (L&&*(L->elem)!=cure_e){
+		ElemType* ptr=(L->elem)+1;
+		for (int i=1;i<L->length;i++){
+			if (*ptr==cure_e){
+				if (pre_e==NULL) pre_e=(ElemType*)malloc(sizeof(ElemType));
+				*pre_e=*(ptr-1);
+				return OK;
+			}
+			ptr++;
+		}
+	}
+	return ERROR;
+}
 
+// 找线性表的后驱
+Status NextElem(SqList* L, ElemType cure_e, ElemType* nex_e){
+	if (L&&*(L->elem+L->length-1)!=cure_e){
+		ElemType* ptr=L->elem;
+		for (int i=0;i<L->length-1;i++){
+			if (*ptr==cure_e){
+				if (nex_e==NULL) nex_e=(ElemType*)malloc(sizeof(ElemType));
+				*nex_e=*(ptr+1);
+				return OK;
+			}
+			ptr++;
+		}
+	}
+	return ERROR;
+}
+
+// 拓展表
+Status ListRealloc(SqList* L){
+	L->elem=(ElemType*)realloc(L->elem,L->length+LISTINCREMENT);
+	L->listsize+=LISTINCREMENT;
+	return OK;
+}
+
+// 线性表插入
+Status ListInsert(SqList* L,int i,ElemType e){
+	if (L&&i>0&&i<=L->length+1){
+		ElemType tmp=0;
+		if (L->listsize==L->length) ListRealloc(L);
+		for (int index=L->length+1;index>i;index--){
+		*(L->elem+index-1)=*(L->elem+index-2);
+		}
+		*(L->elem+i-1)=e;
+		L->length++;
+		return OK;
+	}
+	return ERROR;
+}
+
+// 线性表删除
+Status ListDelete(SqList* L,int i,ElemType* e){
+	if (L&&i<=L->length&&i>0){
+		*e=*(L->elem+i-1);
+		for (int index=i;index<L->length;index++){
+			*(L->elem+index-1)=*(L->elem+index);
+		}
+		L->length--;
+		return OK;
+	}
+	return ERROR;
+}

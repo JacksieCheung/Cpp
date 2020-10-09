@@ -24,4 +24,8 @@ Status ListLength(SqList* L);
 Status GetElem(SqList* L);
 Status Compare(ElemType a,ElemType b);
 Status LocateElem(SqList* L,ElemType e,Status(*compare)(ElemType,ElemType));
+Status PriorElem(SqList* L,ElemType cure_e, ElemType* pre_e);
+Status NextElem(SqList* L,ElemType cure_e, ElemType* nex_e);
+Status ListInsert(SqList* L,int i,ElemType e);
+Status ListDelete(SqList* L,int i,ElemType* e);
 #endif

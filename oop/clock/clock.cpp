@@ -14,6 +14,8 @@ class Clock{
 		// 拷贝函数
 		Clock(Clock& c){
 			H=c.H,M=c.M,S=c.S;
+			// this->H=c.H,this->M=c.M,this->S=c.S;
+			// (*this).H=c.H,(*this).M=c.M,(*this).S=c.S;
 		}
 
 		void SetTime(int h,int m,int s){

@@ -1,0 +1,10 @@
+tub.cpp: In constructor 'tube::tube(double, double, double, int, int)':
+tub.cpp:34:10: warning: 'tube::InCircle' will be initialized after [-Wreorder]
+   Circle InCircle;
+          ^~~~~~~~
+tub.cpp:36:86: warning:   base 'Circle' [-Wreorder]
+   tube(double H,double R1,double R2=0,int X=0,int Y=0):InCircle(R2,X,Y),Circle(R1,X,Y){
+                                                                                      ^
+tub.cpp:36:3: warning:   when initialized here [-Wreorder]
+   tube(double H,double R1,double R2=0,int X=0,int Y=0):InCircle(R2,X,Y),Circle(R1,X,Y){
+   ^~~~

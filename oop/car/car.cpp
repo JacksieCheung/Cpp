@@ -1,3 +1,4 @@
+// 这是继承的二异性的问题。
 #include<iostream>
 
 using namespace std;
@@ -31,7 +32,7 @@ class Wagon {
 
 class StationWagon: public Car,public Wagon{
 	public:
-		StationWagon(int power,int seat,int load):Car(power,load),Wagon(power,seat){}
+		StationWagon(int powerA,int powerB,int seat,int load):Car(powerA,load),Wagon(powerB,seat){}
 		
 		void ShowSW(){
 			cout<<"StationWagon:"<<endl;
@@ -41,7 +42,7 @@ class StationWagon: public Car,public Wagon{
 };
 
 int main(){
-	StationWagon SW(105,3,8);
+	StationWagon SW(105,106,3,8);
 	SW.ShowSW();
 	return 0;
 }

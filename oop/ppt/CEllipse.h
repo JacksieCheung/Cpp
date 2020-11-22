@@ -1,13 +1,14 @@
 #include<iostream>
 #include<cstring>
 
-// 椭圆文本框类
+// 圆文本框类
 class CEllipse{
 	private:
 		int AddX; // 原点Ｘ
 		int AddY; // 原点Ｙ
 		int Radium;
 		char* Message;
+		friend class CPPage;
 	public:
 		CEllipse(int AddX=0,int AddY=0,int Radium=0,const char* Message=NULL){
 			this->AddX = AddX;
@@ -50,6 +51,12 @@ class CEllipse{
 		}
 
 		// 查看信息
+		void ShowInfo(){
+			std::cout<<"Here is a CEllipse object:"<<std::endl;
+			std::cout<<"AddX:"<<AddX<<" , "<<"AddY:"<<AddY<<std::endl;
+			std::cout<<"Radium:"<<Radium<<std::endl;
+		}
+
 		void ShowMsg(){
 			std::cout<<"Here is a CEllipse object:"<<std::endl;
 			std::cout<<"AddX:"<<AddX<<" , "<<"AddY:"<<AddY<<std::endl;

@@ -9,6 +9,7 @@ class CRect{
 		int Length;
 		int Height;
 		char* Message;
+		friend class CPPage; // 友元
 	public:
 		CRect(int AddX=0,int AddY=0,int Length=0,int Height=0,const char* Message=NULL){
 			this->AddX = AddX;
@@ -54,6 +55,12 @@ class CRect{
 		}
 
 		// 打印信息
+		void ShowInfo(){
+			std::cout<<"Here is a CRect object:"<<std::endl;
+			std::cout<<"AddX:"<<AddX<<" , "<<"AddY:"<<AddY<<std::endl;
+			std::cout<<"Length:"<<Length<<" , "<<"Height:"<<Height<<std::endl;
+		}
+
 		void ShowMsg(){
 			std::cout<<"Here is a CRect object:"<<std::endl;
 			std::cout<<"AddX:"<<AddX<<" , "<<"AddY:"<<AddY<<std::endl;

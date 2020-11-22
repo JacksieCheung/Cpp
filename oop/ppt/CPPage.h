@@ -1,20 +1,12 @@
 #include "CRect.h"
 #include "CEllipse.h"
-#define INITIAL_SIZE 10
 #define Status int
 
 // 建立文本框后返回信息，用于定位
 typedef struct code{
-	int Code;  // 类型序号，1->矩形 2->椭圆
+	int Code;  // 类型序号，1->矩形 2->圆
 	int Index; // 数组中的索引
 } Code;
-
-// 修改时的请求，用于定位和确定动作
-typedef struct request{
-	int action;  // 0->删除 1->改变大小 2->改变文本
-	int Code;
-	int Index;
-} ModifyRequest;
 
 // 派生链表节点的类 CRect
 class CRnode:public CRect{
@@ -51,10 +43,12 @@ class CPPage{
 	private:
 		CRnode* CRptr;
 		CEnode* CEptr;
-		int CRnums;
-		int CEnums;
-		int Number;
+		int CRnums; // 矩形的数量
+		int CEnums; // 圆形的数量
+		int Number; // 用于给同一个页面的这两个文本框计数
 	public:
+		static int count; // 计数 CPPage
+
 		CPPage(){
 			CRptr = NULL;
 			CEptr = NULL;
@@ -85,6 +79,30 @@ class CPPage{
 			CRnums++;
 			Number++;
 			return Code{Code:1,Index:Number-1};
+		}
+
+		Status ModifyCRMsgById(int index,const char* Message){
+			CRnode* tmp = CRptr;
+			while(tmp!=NULL) {
+				if (tmp->Index==index) break;
+			}
+
+			if (tmp==NULL) return 0; // cr 走完了，说明没找到，返回错误代码 0
+
+			tmp->ChangeMsg(Message);
+			return 1;
+		}
+
+		Status ModifyCRSizeById(int index,int AddX,int AddY,int Length,int Height){
+			CRnode* tmp = CRptr;
+			while(tmp!=NULL) {
+				if (tmp->Index==index) break;
+			}
+
+			if (tmp==NULL) return 0; // cr 走完了，说明没找到，返回错误代码 0
+
+			tmp->ChangeSize(AddX,AddY,Length,Height);
+			return 1;
 		}
 
 		// 删除一个矩形对象
@@ -118,7 +136,31 @@ class CPPage{
 			return Code{Code:2,Index:Number-1};
 		}
 
-		// 删除一个椭圆文本框
+		Status ModifyCEMsgById(int index,const char* Message){
+			CEnode* tmp = CEptr;
+			while(tmp!=NULL) {
+				if (tmp->Index==index) break;
+			}
+
+			if (tmp==NULL) return 0; // cr 走完了，说明没找到，返回错误代码 0
+
+			tmp->ChangeMsg(Message);
+			return 1;
+		}
+
+		Status ModifyCESizeById(int index,int AddX,int AddY,int Radium){
+			CEnode* tmp = CEptr;
+			while(tmp!=NULL) {
+				if (tmp->Index==index) break;
+			}
+
+			if (tmp==NULL) return 0; // cr 走完了，说明没找到，返回错误代码 0
+		
+			tmp->ChangeSize(AddX,AddY,Radium);
+			return 1;
+		}
+
+		// 删除一个圆形文本框
 		Status DeleteCEByID(int index){
 			CEnode* tmpHead = CEptr;
 			CEnode* tmpTail = NULL;
@@ -137,21 +179,22 @@ class CPPage{
 			return 1;
 		}
  
-
 		// 显示全部的文本框信息
 		void Show(){
 			std::cout<<"Here is a page:"<<std::endl;
 			std::cout<<"CRnums:"<<CRnums<<" , "<<"CEnums:"<<CEnums<<std::endl<<std::endl;;
-			CRnode* tmp1 = CRptr;
 			
+			CRnode* tmp1 = CRptr;
 			while(tmp1!=NULL){
-				tmp1->ShowMsg();
+				tmp1->ShowInfo();
+				std::cout<<tmp1->Message<<std::endl<<std::endl;
 				tmp1 = tmp1->Next;
 			}
 
 			CEnode* tmp2 = CEptr;
 			while(tmp2!=NULL){
-				tmp2->ShowMsg();
+				tmp2->ShowInfo();
+				std::cout<<tmp2->Message<<std::endl<<std::endl;
 				tmp2 = tmp2->Next;
 			}
 

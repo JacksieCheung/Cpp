@@ -17,6 +17,8 @@ class Complex {
         }
 
         // 省略了左边的操作数，默认是类的对象，而且是取地址那种
+        // 想要两个操作数能能互换，必须使用友元
+        // 一般单目运算是类重载，双目运算友元重载
         Complex operator + (Complex B);
         Complex operator - (Complex B);
         Complex operator - ();

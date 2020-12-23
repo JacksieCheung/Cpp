@@ -3,23 +3,16 @@
 // 圆文本框类
 class CEllipse:public CGraph{
 	private:
-		int AddX; // 原点Ｘ
-		int AddY; // 原点Ｙ
 		int Radium;
-		char* Message;
 		friend class CPPage;
 	public:
-		CEllipse(int AddX=0,int AddY=0,int Radium=0,const char* Message=NULL){
-			this->AddX = AddX;
-			this->AddY = AddY;
+		CEllipse(int AddX=0,int AddY=0,int Radium=0,
+		const char* Message=NULL,char* Colour):
+		CGraph(AddX,AddY,Message,Colour){
 			this->Radium = Radium;
-			this->Message = NULL;
-			if (Message != NULL){
-				this->Message = new char[10];
-				std::strcpy(this->Message,Message);
-			}
 		}
-		CEllipse(const CEllipse& c){
+		/*CEllipse(const CEllipse& c):
+		CGraph(c.AddX,c.AddY,c.Message,c.Colour){
 			this->AddX = c.AddX;
 			this->AddY = c.AddY;
 			this->Radium = c.Radium;
@@ -28,10 +21,7 @@ class CEllipse:public CGraph{
 				this->Message = new char[10];
 				std::strcpy(this->Message,c.Message);
 			}
-		}
-		~CEllipse(){
-			delete Message;
-		}
+		}*/
 
 		// 修改属性
 		void ChangeSize(int AddX,int AddY,int Radium){

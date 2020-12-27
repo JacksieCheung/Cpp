@@ -1,3 +1,4 @@
+// p7_10
 #include<iostream>
 #include<cstring>
 

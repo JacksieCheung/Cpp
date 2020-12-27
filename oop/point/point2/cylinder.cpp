@@ -1,3 +1,4 @@
+// p6_2
 #include "point2.h"
 
 const double PI=3.14159;

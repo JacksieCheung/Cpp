@@ -1,3 +1,4 @@
+// p6_5
 // 这是继承的二异性的问题。
 #include<iostream>
 

@@ -1,3 +1,4 @@
+// p6_3
 #include<iostream>
 
 using namespace std;

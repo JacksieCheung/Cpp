@@ -13,9 +13,9 @@ typedef struct seat{
 } Seat;
 
 void InitQueue();
-void InsertQueue();
-int InsertSeatIfFree();
-void CheckSeatLeaveAt();
+void InsertQueue(Customer* cus);
+int InsertSeatIfFree(Customer* cus);
+void CheckSeatLeaveAt(double* income);
 void InsertSeatFromQueue();
 Customer* NewCustomer();
 void PrintfQueueInfo();

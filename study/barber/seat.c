@@ -69,7 +69,7 @@ void InsertQueue(Customer* cus){
 
     while(tmp->Next!=NULL) tmp = tmp->Next;
     tmp->Next = cus; // cus 插入到队尾
-    printfQueueInfo();
+    PrintfQueueInfo();
     return;
 }
 

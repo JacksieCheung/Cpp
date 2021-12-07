@@ -154,6 +154,7 @@ void Destroy(node *head)
     }
     cout << "链表已经销毁" << endl;
 }
+
 int main()
 {
     // node* head1;     // 没有分配内存吗？？？

@@ -1,0 +1,10 @@
+const.cpp: In constructor 'A::A(int)':
+const.cpp:8:13: warning: 'A::a' will be initialized after [-Wreorder]
+   const int a;
+             ^
+const.cpp:7:14: warning:   'const int& A::r' [-Wreorder]
+   const int& r;
+              ^
+const.cpp:11:3: warning:   when initialized here [-Wreorder]
+   A(int i):a(i),r(a){ // 只能在函数后面的赋值列表赋值，别的地方只读
+   ^

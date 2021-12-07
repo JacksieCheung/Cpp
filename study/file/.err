@@ -1,0 +1,15 @@
+p4_1_p1.cpp: In function 'int main()':
+p4_1_p1.cpp:15:2: error: 'p2dispG' was not declared in this scope
+  p2dispG();
+  ^~~~~~~
+p4_1_p1.cpp:15:2: note: suggested alternative: 'p1dispG'
+  p2dispG();
+  ^~~~~~~
+  p1dispG
+p4_1_p1.cpp:16:2: error: 'p2dispg' was not declared in this scope
+  p2dispg();
+  ^~~~~~~
+p4_1_p1.cpp:16:2: note: suggested alternative: 'p1dispG'
+  p2dispg();
+  ^~~~~~~
+  p1dispG
